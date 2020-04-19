@@ -1,5 +1,5 @@
-import { Player } from "./Player";
-import { Placement, Rect, Surface } from "./types";
+import { Player } from "./player";
+import { Placement, Rect, Surface, Size } from "./types";
 
 export function getRandomBoundedPlacement(
 	surface: Surface,
@@ -8,6 +8,16 @@ export function getRandomBoundedPlacement(
 	return {
 		x: Math.random() * surface.bounds.right * multiplier,
 		y: Math.random() * surface.bounds.bottom * multiplier,
+	};
+}
+
+export function getBoundedCenter(
+	surface: Surface,
+	objectSize: Size
+): Placement {
+	return {
+		x: (surface.bounds.right - surface.bounds.left - objectSize.width / 2) / 2,
+		y: (surface.bounds.bottom - surface.bounds.top - objectSize.height) / 2,
 	};
 }
 

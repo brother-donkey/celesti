@@ -1,19 +1,27 @@
-import { Moveable, GamePiece, Placement, Rect, Surface } from "./types";
-import { getPlacementFromObject, getRandomBoundedPlacement } from "./placement";
+import { Moves, GamePiece, Placement, Rect, Surface } from "./types";
+import { getPosition, getRandomBoundedPlacement } from "./placement";
+import { Place } from "./place";
 
-export class Player implements Moveable, GamePiece {
-	private _meandering: false;
+export class Player implements Moves, GamePiece {
+	private _meandering = false;
+	private _orbiting = false;
 	private _meanderInterval: number;
+	public view: HTMLElement;
+	public origin: Placement;
 
 	constructor(
-		public readonly origin: Placement,
 		public placement,
-		public readonly view: HTMLElement,
 		public readonly surface: Surface,
 		public speed: number = 2,
 		public width = 48,
 		public height = 48
 	) {
+		this.view = document.createElement("div");
+		this.view.classList.add("player");
+		this.surface.view.appendChild(this.view);
+
+		this.origin = getPosition(this.view);
+
 		this.move(placement);
 		this.view.style.width = `${width}px`;
 		this.view.style.height = `${height}px`;
@@ -58,5 +66,25 @@ export class Player implements Moveable, GamePiece {
 	public stop() {
 		this._meandering = false;
 		clearInterval(this._meanderInterval);
+	}
+
+	public orbit(
+		object: Place,
+		direction: "clockwise" | "counterclockwise",
+		distance = 44
+	) {
+		this._orbiting = true;
+		// this.
+		this.view.style.transform = ``;
+		this.view.style.transformOrigin = `${object.size.width + distance}px ${
+			object.size.height + distance
+		}px`;
+		this.view.style.top = `${
+			object.placement.y - object.size.height / 2 - distance
+		}px`;
+		this.view.style.left = `${
+			object.placement.x - object.size.width / 2 - distance
+		}px`;
+		this.view.style.animation = `orbit-${direction} 8s linear infinite`;
 	}
 }

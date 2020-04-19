@@ -3,7 +3,12 @@ export interface GamePiece {
 	readonly view: HTMLElement;
 }
 
-export interface Moveable {
+export interface Size {
+	height: number;
+	width: number;
+}
+
+export interface Moves {
 	placement: Placement;
 	speed: number;
 }
