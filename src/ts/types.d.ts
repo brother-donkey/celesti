@@ -1,10 +1,11 @@
-interface GamePiece {
+export interface GamePiece {
 	readonly origin: Placement;
 	readonly view: HTMLElement;
 }
 
-interface Moveable {
+export interface Moveable {
 	placement: Placement;
+	speed: number;
 }
 
 export interface Surface extends GamePiece {
@@ -18,9 +19,7 @@ export interface Rect {
 	right: number;
 }
 
-export interface Player extends GamePiece, Moveable {}
-
-interface Placement {
+export interface Placement {
 	x: number;
 	y: number;
 }

@@ -8,14 +8,16 @@
 	max-width: 800px;
 	min-height: 400px;
 	position: relative;
+	background: white;
 }
 
 .player {
-	height: 4rem;
-	width: 4rem;
-	background: red;
+	height: 3rem;
+	width: 3rem;
 	border: 1px solid slateblue;
+	background: transparentize(slateblue, 0.9);
+	outline: 1px;
 	position: absolute;
-	transition: all 0.5s ease-in-out;
 	transform-origin: center;
+	border-radius: 100%;
 }
