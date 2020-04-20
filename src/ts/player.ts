@@ -1,6 +1,33 @@
-import { Moves, GamePiece, Placement, Rect, Surface } from "./types";
+import {
+	Moves,
+	GamePiece,
+	Placement,
+	Rect,
+	Surface,
+	Size,
+	PlayerConfig,
+} from "./types";
 import { getPosition, getRandomBoundedPlacement } from "./placement";
 import { Place } from "./place";
+
+const defaultConfig = {
+	speed: 2,
+	size: {
+		height: 48,
+		width: 48,
+	},
+};
+
+let staggerCount = 0;
+
+function getStaggerCounter() {
+	const stagger = staggerCount;
+	staggerCount++;
+	if (staggerCount > 15) {
+		staggerCount = 0;
+	}
+	return stagger;
+}
 
 export class Player implements Moves, GamePiece {
 	private _meandering = false;
@@ -8,23 +35,29 @@ export class Player implements Moves, GamePiece {
 	private _meanderInterval: number;
 	public view: HTMLElement;
 	public origin: Placement;
+	public size: Size;
+	public speed: number;
+	public _staggering: number;
 
 	constructor(
 		public placement,
 		public readonly surface: Surface,
-		public speed: number = 2,
-		public width = 48,
-		public height = 48
+		config: Partial<PlayerConfig> = defaultConfig
 	) {
+		config = { ...defaultConfig, ...config };
+		this.size = config.size;
+		this.speed = config.speed;
 		this.view = document.createElement("div");
 		this.view.classList.add("player");
 		this.surface.view.appendChild(this.view);
+		this._staggering = getStaggerCounter();
+		staggerCount++;
 
 		this.origin = getPosition(this.view);
 
 		this.move(placement);
-		this.view.style.width = `${width}px`;
-		this.view.style.height = `${height}px`;
+		this.view.style.width = `${this.size.width}px`;
+		this.view.style.height = `${this.size.height}px`;
 		this.view.style.transition = `all ${this.speed}s linear`;
 	}
 
@@ -44,11 +77,11 @@ export class Player implements Moves, GamePiece {
 		const realX = moveTo.x + this.surface.origin.x;
 		const realY = moveTo.y + this.surface.origin.y;
 		moveTo.x = Math.max(
-			Math.min(this.surface.bounds.right - this.width, realX),
+			Math.min(this.surface.bounds.right - this.size.width, realX),
 			this.surface.bounds.left
 		);
 		moveTo.y = Math.max(
-			Math.min(this.surface.bounds.bottom - this.width, realY),
+			Math.min(this.surface.bounds.bottom - this.size.width, realY),
 			this.surface.bounds.top
 		);
 	}
@@ -73,8 +106,8 @@ export class Player implements Moves, GamePiece {
 		direction: "clockwise" | "counterclockwise",
 		distance = 44
 	) {
+		staggerCount++;
 		this._orbiting = true;
-		// this.
 		this.view.style.transform = ``;
 		this.view.style.transformOrigin = `${object.size.width + distance}px ${
 			object.size.height + distance
@@ -85,6 +118,8 @@ export class Player implements Moves, GamePiece {
 		this.view.style.left = `${
 			object.placement.x - object.size.width / 2 - distance
 		}px`;
-		this.view.style.animation = `orbit-${direction} 8s linear infinite`;
+		this.view.style.animation = `orbit-${direction} ${
+			8 + this._staggering
+		}s linear infinite`;
 	}
 }

@@ -28,3 +28,12 @@ export interface Placement {
 	x: number;
 	y: number;
 }
+
+export interface PlayerConfig {
+	size: Size;
+	speed: number;
+}
+
+export interface PlaceConfig {
+	size: Size;
+}

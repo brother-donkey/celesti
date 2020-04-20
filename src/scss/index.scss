@@ -2,7 +2,6 @@
 	box-sizing: border-box;
 	border-width: 0.5rem !important;
 	outline-width: 0.5rem !important;
-	border-radius: 100%;
 }
 
 .game-container {
@@ -22,14 +21,14 @@
 	background: transparentize(slateblue, 0.25);
 	outline: 1px;
 	position: absolute;
-	// transform-origin: center;
-	// border-radius: 100%;
-	// animation: 8s linear orbitClockwise infinite;
+	transform-origin: center;
+	border-radius: 100%;
 }
 
 .place {
 	border: 1px solid transparentize(green, 0.75);
 	background: transparentize(green, 0.25);
+	border-radius: 100%;
 }
 
 @keyframes orbit-clockwise {

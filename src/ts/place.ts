@@ -1,15 +1,25 @@
-import { GamePiece, Placement, Surface, Size } from "./types";
+import { GamePiece, Placement, Surface, PlaceConfig, Size } from "./types";
 import { getPosition } from "./placement";
+
+const defaultConfig = {
+	size: {
+		height: 48,
+		width: 48,
+	},
+};
 
 export class Place implements GamePiece {
 	view: HTMLElement;
 	origin: Placement;
+	size: Size;
 
 	constructor(
 		surface: Surface,
 		public placement: Placement,
-		public size: Size
+		public config: Partial<PlaceConfig> = defaultConfig
 	) {
+		config = { ...defaultConfig, ...config };
+		this.size = config.size;
 		this.view = document.createElement("div");
 		this.view.classList.add("place");
 		surface.view.appendChild(this.view);
@@ -20,8 +30,8 @@ export class Place implements GamePiece {
 		this.view.style.top = `${placement.y}px`;
 		this.view.style.left = `${placement.x}px`;
 
-		this.view.style.width = `${size.width}px`;
-		this.view.style.height = `${size.height}px`;
+		this.view.style.width = `${this.size.width}px`;
+		this.view.style.height = `${this.size.height}px`;
 	}
 
 	get center() {
