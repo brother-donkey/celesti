@@ -9,10 +9,11 @@ export function generatePlayers(surface: Surface, places: Place[]) {
 	let counter2 = 0;
 
 	for (let i = 0; i < 48; i++) {
+		const size = i * Math.random() * 5;
 		const player = new Player(getRandomBoundedPlacement(surface), surface, {
 			size: {
-				height: i * 1.5,
-				width: i * 1.5,
+				height: size,
+				width: size,
 			},
 		});
 		players.push(player);
@@ -20,9 +21,9 @@ export function generatePlayers(surface: Surface, places: Place[]) {
 		const place = getRandomPlaceByCounter(counter2, places);
 
 		if (i % 2 === 0) {
-			player.orbit(place, direction, i * Math.random() * 100);
+			player.orbit(place, direction, i * Math.random() * 25);
 		} else {
-			player.orbit(place, direction, i * Math.random() * 50);
+			player.orbit(place, direction, i * Math.random() * 10);
 		}
 
 		counter++;
