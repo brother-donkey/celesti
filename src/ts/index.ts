@@ -1,54 +1,23 @@
-import { Surface, Placement, Rect } from "./types";
-import { Player, player1 } from "./player";
-import {
-	getBounds,
-	getPosition,
-	getRandomBoundedPlacement,
-	getBoundedCenter,
-} from "./placement";
-import { Place } from "./place";
-import { generatePlayers } from "./generate";
 import { ossilateColor } from "./changes";
+import { generatePlayers, randomRotation } from "./generate";
+import { Place } from "./place";
+import { getBoundedCenter, getRandomBoundedPlacement } from "./placement";
+import { Player, player1 } from "./player";
 import { surface } from "./surface";
+
+const player1Size = Math.floor(Math.random() * 25) + 8;
 
 // create player 1
 new Player(getRandomBoundedPlacement(surface), surface, {
 	size: {
-		height: 24,
-		width: 24,
+		height: player1Size,
+		width: player1Size,
 	},
 });
 
 player1.view.classList.add("player-1");
 
 player1.meander();
-
-// const player2 = new Player(getRandomBoundedPlacement(surface), surface, {
-// 	size: {
-// 		height: 12,
-// 		width: 12,
-// 	},
-// });
-// const player3 = new Player(getRandomBoundedPlacement(surface), surface, {
-// 	size: { height: 16, width: 16 },
-// });
-// const player4 = new Player(getRandomBoundedPlacement(surface), surface, {
-// 	size: { height: 36, width: 36 },
-// });
-
-// setTimeout(() => {
-// 	player.stop(, 2, { height: 24, width: 24});
-// }, 8000);
-
-// setTimeout(() => {
-// 	player.meander();
-// }, 3000);
-
-// const places = [];
-
-// for (let i = 0; i < 16; i++) {
-// 	places.push(new Place(surface, getRandomBoundedPlacement(surface), 88, 88));
-// }
 
 const centeredPlace = new Place(
 	surface,
@@ -68,24 +37,30 @@ const places = [
 ];
 
 places.forEach((place, i) => ossilateColor(place.view, (i + 1) * 1000));
-ossilateColor(player1.view, 8000);
+ossilateColor(player1.view, 500);
 // player1.meander();
 
 const staticPlayers = generatePlayers(surface, places);
 
-// changeRotation();
+changeRotation();
 
-// function changeRotation() {
-// 	let evenOdd = 0;
-// 	setInterval(() => {
-// 		if (evenOdd % 2 === 0) {
-// 			player1.orbit(centeredPlace, "clockwise", 44);
-// 		} else {
-// 			player1.orbit(randomPlace, "clockwise", 44);
-// 		}
-// 		evenOdd++;
-// 	}, 4000);
-// }
+function changeRotation() {
+	let evenOdd = Math.floor(Math.random() * 3);
+	setInterval(() => {
+		if (evenOdd % 2 === 0) {
+			player1.orbit(centeredPlace, randomRotation(), 44);
+		} else if (evenOdd % 3 === 0) {
+			player1.meander();
+		} else {
+			player1.orbit(
+				places[Math.floor(Math.random() * 5)],
+				randomRotation(),
+				Math.floor(Math.random() * 88)
+			);
+		}
+		evenOdd++;
+	}, 7000);
+}
 
 // player1.stop();
 
@@ -98,4 +73,4 @@ setTimeout(() => {
 		// player.move(player.origin);
 		player.orbit(centeredPlace, direction, i * Math.random() * 25);
 	});
-}, 8000);
+}, 12000);

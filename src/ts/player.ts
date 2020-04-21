@@ -1,15 +1,13 @@
-import {
-	Moves,
-	GamePiece,
-	Placement,
-	Rect,
-	Surface,
-	Size,
-	PlayerConfig,
-} from "./types";
-import { getPosition, getRandomBoundedPlacement } from "./placement";
 import { Place } from "./place";
-import { surface } from "./surface";
+import { getPosition, getRandomBoundedPlacement } from "./placement";
+import {
+	GamePiece,
+	Moves,
+	Placement,
+	PlayerConfig,
+	Size,
+	Surface,
+} from "./types";
 
 const defaultConfig = {
 	speed: 2,
