@@ -5,7 +5,7 @@ import { getBoundedCenter, getRandomBoundedPlacement } from "./placement";
 import { Player, player1 } from "./player";
 import { surface } from "./surface";
 
-const player1Size = Math.floor(Math.random() * 25) + 8;
+const player1Size = Math.floor(Math.random() * 126) + 8;
 
 // create player 1
 new Player(getRandomBoundedPlacement(surface), surface, {
@@ -38,6 +38,7 @@ const places = [
 
 places.forEach((place, i) => ossilateColor(place.view, (i + 1) * 1000));
 ossilateColor(player1.view, 500);
+ossilateColor(surface.view, 16000);
 // player1.meander();
 
 const staticPlayers = generatePlayers(surface, places);

@@ -12,13 +12,13 @@ body {
 .game-container {
 	margin: 0;
 	padding: 0;
-	// outline: 1px solid transparentize(red, 0.75);
 	max-width: 100%;
 	min-height: 100vh;
 	position: relative;
 	background: white;
 	overflow: hidden;
 	background: indigo;
+	transition: all 1s linear;
 }
 
 .player-1 {
