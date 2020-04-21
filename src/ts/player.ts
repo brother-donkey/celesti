@@ -9,6 +9,7 @@ import {
 } from "./types";
 import { getPosition, getRandomBoundedPlacement } from "./placement";
 import { Place } from "./place";
+import { surface } from "./surface";
 
 const defaultConfig = {
 	speed: 2,
@@ -29,6 +30,8 @@ function getStaggerCounter() {
 	return stagger;
 }
 
+export let player1: Player;
+
 export class Player implements Moves, GamePiece {
 	private _meandering = false;
 	private _orbiting = false;
@@ -44,6 +47,9 @@ export class Player implements Moves, GamePiece {
 		public readonly surface: Surface,
 		config: Partial<PlayerConfig> = defaultConfig
 	) {
+		if (!player1) {
+			player1 = this;
+		}
 		config = { ...defaultConfig, ...config };
 		this.size = config.size;
 		this.speed = config.speed;

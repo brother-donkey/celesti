@@ -13,10 +13,11 @@
 	background: white;
 	overflow: hidden;
 	background: indigo;
+}
 
-	// max-width: 100vw;
-	// min-height: 100vh;
-	// margin: 0;
+.player-1 {
+	animation-timing-function: cubic-bezier(0.17, 0.67, 0, 1.58) !important;
+	border: 2px solid white !important;
 }
 
 .player {
@@ -34,6 +35,7 @@
 	border: 1px solid transparentize(green, 0.75);
 	background: transparentize(green, 0.25);
 	border-radius: 100%;
+	transition: all 1s linear;
 }
 
 @keyframes orbit-clockwise {

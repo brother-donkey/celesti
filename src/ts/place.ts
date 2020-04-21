@@ -1,5 +1,6 @@
 import { GamePiece, Placement, Surface, PlaceConfig, Size } from "./types";
 import { getPosition } from "./placement";
+import { namedColors } from "./colors";
 
 const defaultConfig = {
 	size: {
@@ -27,6 +28,7 @@ export class Place implements GamePiece {
 		this.origin = getPosition(this.view);
 
 		this.view.style.position = "absolute";
+
 		this.view.style.top = `${placement.y}px`;
 		this.view.style.left = `${placement.x}px`;
 

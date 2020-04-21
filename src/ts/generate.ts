@@ -32,8 +32,8 @@ export function generatePlayers(surface: Surface, places: Place[]) {
 	return players;
 }
 
-export function getRandomPlaceByCounter(counter2: number, places: Place[]) {
+export function getRandomPlaceByCounter(counter: number, places: Place[]) {
 	// must have at least 5 places
-	const index = counter2 % 5;
+	const index = counter % 5;
 	return places[index];
 }

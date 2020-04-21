@@ -1,5 +1,5 @@
 import { Surface, Placement, Rect } from "./types";
-import { Player } from "./player";
+import { Player, player1 } from "./player";
 import {
 	getBounds,
 	getPosition,
@@ -8,23 +8,20 @@ import {
 } from "./placement";
 import { Place } from "./place";
 import { generatePlayers } from "./generate";
+import { ossilateColor } from "./changes";
+import { surface } from "./surface";
 
-const gameView = document.querySelector(".game-container") as HTMLElement;
-
-const surface: Surface = {
-	bounds: getBounds(gameView),
-	origin: getPosition(gameView),
-	view: gameView,
-};
-
-const player1 = new Player(getRandomBoundedPlacement(surface), surface, {
+// create player 1
+new Player(getRandomBoundedPlacement(surface), surface, {
 	size: {
 		height: 24,
 		width: 24,
 	},
 });
 
-// player1.meander();
+player1.view.classList.add("player-1");
+
+player1.meander();
 
 // const player2 = new Player(getRandomBoundedPlacement(surface), surface, {
 // 	size: {
@@ -60,14 +57,21 @@ const centeredPlace = new Place(
 );
 
 const places = [
+	new Place(surface, getRandomBoundedPlacement(surface)),
+	new Place(surface, getRandomBoundedPlacement(surface)),
+	new Place(surface, getRandomBoundedPlacement(surface)),
+	new Place(surface, getRandomBoundedPlacement(surface)),
+	new Place(surface, getRandomBoundedPlacement(surface), {
+		size: { height: 192, width: 192 },
+	}),
 	centeredPlace,
-	new Place(surface, getRandomBoundedPlacement(surface)),
-	new Place(surface, getRandomBoundedPlacement(surface)),
-	new Place(surface, getRandomBoundedPlacement(surface)),
-	new Place(surface, getRandomBoundedPlacement(surface)),
 ];
 
-generatePlayers(surface, places);
+places.forEach((place, i) => ossilateColor(place.view, (i + 1) * 1000));
+ossilateColor(player1.view, 8000);
+// player1.meander();
+
+const staticPlayers = generatePlayers(surface, places);
 
 // changeRotation();
 
@@ -84,3 +88,14 @@ generatePlayers(surface, places);
 // }
 
 // player1.stop();
+
+setTimeout(() => {
+	staticPlayers.forEach((player: Player, i) => {
+		const direction =
+			Math.floor(Math.random() * 2) % 2 === 0
+				? "clockwise"
+				: "counterclockwise";
+		// player.move(player.origin);
+		player.orbit(centeredPlace, direction, i * Math.random() * 25);
+	});
+}, 8000);
