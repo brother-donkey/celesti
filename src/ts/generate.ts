@@ -2,8 +2,9 @@ import { getRandomBoundedPlacement } from "./placement";
 import { Surface } from "./types";
 import { Player } from "./player";
 import { Place } from "./place";
+import { ossilateColor } from "./changes";
 
-export function generatePlayers(surface: Surface, places: Place[]) {
+export function generateBodies(surface: Surface, places: Place[]) {
 	const players = [];
 
 	for (let i = 0; i < 48; i++) {

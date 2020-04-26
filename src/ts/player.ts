@@ -15,6 +15,7 @@ const defaultConfig = {
 		height: 48,
 		width: 48,
 	},
+	color: "rgba(72, 61, 139, .25)",
 };
 
 let staggerCount = 0;
@@ -27,8 +28,6 @@ function getStaggerCounter() {
 	}
 	return stagger;
 }
-
-export let player1: Player;
 
 export class Player implements Moves, GamePiece {
 	private _meandering = false;
@@ -45,9 +44,6 @@ export class Player implements Moves, GamePiece {
 		public readonly surface: Surface,
 		config: Partial<PlayerConfig> = defaultConfig
 	) {
-		if (!player1) {
-			player1 = this;
-		}
 		config = { ...defaultConfig, ...config };
 		this.size = config.size;
 		this.speed = config.speed;
@@ -55,6 +51,7 @@ export class Player implements Moves, GamePiece {
 		this.view.classList.add("player");
 		this.surface.view.appendChild(this.view);
 		this._staggering = getStaggerCounter();
+		this.view.style.backgroundColor = config.color || "";
 		staggerCount++;
 
 		this.origin = getPosition(this.view);
@@ -102,6 +99,7 @@ export class Player implements Moves, GamePiece {
 
 	public stop() {
 		this._meandering = false;
+		this._orbiting = false;
 		clearInterval(this._meanderInterval);
 	}
 
@@ -111,6 +109,7 @@ export class Player implements Moves, GamePiece {
 		distance = 44
 	) {
 		staggerCount++;
+		this._meandering = false;
 		this._orbiting = true;
 		this.view.style.transform = ``;
 		this.view.style.transformOrigin = `${object.size.width + distance}px ${
@@ -122,7 +121,7 @@ export class Player implements Moves, GamePiece {
 		this.view.style.left = `${
 			object.placement.x - object.size.width / 2 - distance
 		}px`;
-		this.view.style.animation = `orbit-${direction} ${
+		this.view.style.animation = `bouncer-orbit-${direction} ${
 			8 + this._staggering
 		}s linear infinite`;
 	}
