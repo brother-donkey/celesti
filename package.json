@@ -1,5 +1,5 @@
 {
-	"name": "@brother-donkey/celesti",
+	"name": "celesti",
 	"version": "1.0.0",
 	"description": "A small package designed to create a beautiful constellation of moving elements.",
 	"repository": {
@@ -18,8 +18,5 @@
 		"cssnano": "^4.1.4",
 		"sass": "^1.14.1",
 		"typescript": "^3.1.1"
-	},
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/brother-donkey"
 	}
 }
