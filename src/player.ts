@@ -1,5 +1,5 @@
-import { Place } from "./place";
-import { getPosition, getRandomBoundedPlacement } from "./placement";
+import { Place } from './place';
+import { getPosition, getRandomBoundedPlacement } from './placement';
 import {
 	GamePiece,
 	Moves,
@@ -7,7 +7,7 @@ import {
 	PlayerConfig,
 	Size,
 	Surface,
-} from "./types";
+} from './types';
 
 const defaultConfig = {
 	speed: 2,
@@ -15,7 +15,7 @@ const defaultConfig = {
 		height: 48,
 		width: 48,
 	},
-	color: "rgba(72, 61, 139, .25)",
+	color: 'rgba(72, 61, 139, .25)',
 };
 
 let staggerCount = 0;
@@ -47,11 +47,11 @@ export class Player implements Moves, GamePiece {
 		config = { ...defaultConfig, ...config };
 		this.size = config.size;
 		this.speed = config.speed;
-		this.view = document.createElement("div");
-		this.view.classList.add("player");
+		this.view = document.createElement('div');
+		this.view.classList.add('player');
 		this.surface.view.appendChild(this.view);
 		this._staggering = getStaggerCounter();
-		this.view.style.backgroundColor = config.color || "";
+		this.view.style.backgroundColor = config.color || '';
 		staggerCount++;
 
 		this.origin = getPosition(this.view);
@@ -105,7 +105,7 @@ export class Player implements Moves, GamePiece {
 
 	public orbit(
 		object: Place,
-		direction: "clockwise" | "counterclockwise",
+		direction: 'clockwise' | 'counterclockwise',
 		distance = 44
 	) {
 		staggerCount++;

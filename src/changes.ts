@@ -1,4 +1,4 @@
-import { namedColors } from "./colors";
+import { namedColors } from './colors';
 
 function randomColor() {
 	// There are 148 named HTML colors

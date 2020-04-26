@@ -1,13 +1,16 @@
-import { getRandomBoundedPlacement } from "./placement";
-import { Surface } from "./types";
-import { Player } from "./player";
-import { Place } from "./place";
-import { ossilateColor } from "./changes";
+import { getRandomBoundedPlacement } from './placement';
+import { Surface } from './types';
+import { Player } from './player';
+import { Place } from './place';
 
-export function generateBodies(surface: Surface, places: Place[]) {
+export function generateBodies(
+	surface: Surface,
+	places: Place[],
+	amount: number = 1
+) {
 	const players = [];
 
-	for (let i = 0; i < 48; i++) {
+	for (let i = 0; i < amount; i++) {
 		const size = i * Math.random() * 5;
 		const player = new Player(getRandomBoundedPlacement(surface), surface, {
 			size: {
@@ -30,8 +33,8 @@ export function generateBodies(surface: Surface, places: Place[]) {
 
 export function randomRotation() {
 	return Math.floor(Math.random() * 2) % 2 === 0
-		? "clockwise"
-		: "counterclockwise";
+		? 'clockwise'
+		: 'counterclockwise';
 }
 
 export function getRandomPlaceByCounter(places: Place[]) {

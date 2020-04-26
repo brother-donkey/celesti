@@ -59,8 +59,8 @@ const stylesheet = `
 `;
 
 export function init(defaultStyle: string = stylesheet) {
-	const styleTag = document.createElement("style");
-	styleTag.type = "text/css";
+	const styleTag = document.createElement('style');
+	styleTag.type = 'text/css';
 	styleTag.appendChild(document.createTextNode(stylesheet));
 	document.head.appendChild(styleTag);
 }

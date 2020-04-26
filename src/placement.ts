@@ -1,5 +1,5 @@
-import { Player } from "./player";
-import { Placement, Rect, Surface, Size } from "./types";
+import { Player } from './player';
+import { Surface, Placement, Size, Rect } from './types';
 
 export function getRandomBoundedPlacement(
 	surface: Surface,

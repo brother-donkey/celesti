@@ -1,16 +1,19 @@
-import { ossilateColor } from "./changes";
-import { generateBodies, randomRotation } from "./generate";
-import { Place } from "./place";
+import { ossilateColor } from './changes';
+import { generateBodies, randomRotation } from './generate';
+import { Place } from './place';
 import {
 	getBoundedCenter,
 	getRandomBoundedPlacement,
 	getBounds,
 	getPosition,
-} from "./placement";
-import { Player } from "./player";
-import { Surface } from "./types";
+} from './placement';
+import { Player } from './player';
+import { Surface } from './types';
+import { init } from './init';
 
 export function playDefault(gameView: HTMLElement) {
+	init();
+
 	const surface: Surface = {
 		bounds: getBounds(gameView),
 		origin: getPosition(gameView),
@@ -26,7 +29,7 @@ export function playDefault(gameView: HTMLElement) {
 		},
 	});
 
-	player1.view.classList.add("player-1");
+	player1.view.classList.add('player-1');
 	player1.meander();
 
 	const centeredPlace = new Place(
@@ -51,7 +54,7 @@ export function playDefault(gameView: HTMLElement) {
 	ossilateColor(player1.view, 1000);
 	ossilateColor(surface.view, 16000);
 
-	const movingBodies = generateBodies(surface, places);
+	const movingBodies = generateBodies(surface, places, 48);
 
 	fluctuationRotations();
 	fluctuateOrbits();
@@ -83,8 +86,8 @@ export function playDefault(gameView: HTMLElement) {
 			movingBodies.forEach((player: Player, i) => {
 				const direction =
 					Math.floor(Math.random() * 2) % 2 === 0
-						? "clockwise"
-						: "counterclockwise";
+						? 'clockwise'
+						: 'counterclockwise';
 				// player.move(player.origin);
 				player.orbit(centeredPlace, direction, i * Math.random() * 25);
 			});
