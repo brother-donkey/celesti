@@ -32,7 +32,7 @@ export interface Placement {
 export interface PlayerConfig {
 	size: Size;
 	speed: number;
-	color?: string;
+	color: string;
 }
 
 export interface PlaceConfig {

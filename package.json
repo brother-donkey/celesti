@@ -1,12 +1,12 @@
 {
-	"name": "front-end-starter",
+	"name": "celesti",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A small package designed to create a beautiful constellation of moving elements.",
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "parcel index.html",
-		"build-ts": "parcel build index.ts",
-		"bulid-example": "parcle build ./docs/index.html"
+		"build": "tsc -p ./tsconfig.json",
+		"bulid-page": "parcle build ./docs/index.html"
 	},
 	"author": "",
 	"license": "ISC",

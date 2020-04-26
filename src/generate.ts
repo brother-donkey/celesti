@@ -8,7 +8,7 @@ export function generateBodies(
 	places: Place[],
 	amount: number = 1
 ) {
-	const players = [];
+	const players: Player[] = [];
 
 	for (let i = 0; i < amount; i++) {
 		const size = i * Math.random() * 5;

@@ -18,8 +18,8 @@ export class Place implements GamePiece {
 		public placement: Placement,
 		public config: Partial<PlaceConfig> = defaultConfig
 	) {
-		config = { ...defaultConfig, ...config };
-		this.size = config.size;
+		const extendedConfig: PlaceConfig = { ...defaultConfig, ...config };
+		this.size = extendedConfig.size;
 		this.view = document.createElement('div');
 		this.view.classList.add('place');
 		surface.view.appendChild(this.view);

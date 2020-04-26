@@ -44,14 +44,17 @@ export class Player implements Moves, GamePiece {
 		public readonly surface: Surface,
 		config: Partial<PlayerConfig> = defaultConfig
 	) {
-		config = { ...defaultConfig, ...config };
-		this.size = config.size;
-		this.speed = config.speed;
+		const extendedConfig: PlayerConfig = (config = {
+			...defaultConfig,
+			...config,
+		});
+		this.size = extendedConfig.size;
+		this.speed = extendedConfig.speed;
 		this.view = document.createElement('div');
 		this.view.classList.add('player');
 		this.surface.view.appendChild(this.view);
 		this._staggering = getStaggerCounter();
-		this.view.style.backgroundColor = config.color || '';
+		this.view.style.backgroundColor = extendedConfig.color;
 		staggerCount++;
 
 		this.origin = getPosition(this.view);
