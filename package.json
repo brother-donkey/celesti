@@ -10,7 +10,7 @@
 	"scripts": {
 		"start": "parcel index.html",
 		"build": "tsc -p ./tsconfig.json",
-		"bulid-page": "parcle build ./docs/index.html"
+		"build-docs": "parcel build index.html --out-dir ./docs"
 	},
 	"author": "",
 	"license": "ISC",
