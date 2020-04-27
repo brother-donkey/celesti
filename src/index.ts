@@ -1,4 +1,4 @@
-export * from './place';
+export * from './major';
 export * from './player';
 export * from './changes';
 export * from './colors';

@@ -1,18 +1,18 @@
 import { getRandomBoundedPlacement } from './placement';
 import { Surface } from './types';
-import { Player } from './player';
-import { Place } from './place';
+import { Minor } from './player';
+import { Major } from './major';
 
 export function generateBodies(
 	surface: Surface,
-	places: Place[],
+	places: Major[],
 	amount: number = 1
 ) {
-	const players: Player[] = [];
+	const players: Minor[] = [];
 
 	for (let i = 0; i < amount; i++) {
 		const size = i * Math.random() * 5;
-		const player = new Player(getRandomBoundedPlacement(surface), surface, {
+		const player = new Minor(getRandomBoundedPlacement(surface), surface, {
 			size: {
 				height: size,
 				width: size,
@@ -37,7 +37,7 @@ export function randomRotation() {
 		: 'counterclockwise';
 }
 
-export function getRandomPlaceByCounter(places: Place[]) {
+export function getRandomPlaceByCounter(places: Major[]) {
 	const num = Math.floor(Math.random() * places.length);
 	return places[num];
 }

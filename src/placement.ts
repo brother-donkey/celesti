@@ -1,4 +1,4 @@
-import { Player } from './player';
+import { Minor } from './player';
 import { Surface, Placement, Size, Rect } from './types';
 
 export function getRandomBoundedPlacement(
@@ -21,7 +21,7 @@ export function getBoundedCenter(
 	};
 }
 
-export function getPlacementFromObject(object: Player, relativeToPage = false) {
+export function getPlacementFromObject(object: Minor, relativeToPage = false) {
 	const placement = Object.assign(object.placement);
 	const regexp = /translate\((-?[\d|\.]*)\w*,?\s?(-?[\d|\.]*)\w*\)/;
 	const transform = object.view.style.transform;

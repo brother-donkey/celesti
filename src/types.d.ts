@@ -1,4 +1,4 @@
-export interface GamePiece {
+export interface CelestialBody {
 	readonly origin: Placement;
 	readonly view: HTMLElement;
 }
@@ -8,12 +8,12 @@ export interface Size {
 	width: number;
 }
 
-export interface Moves {
+export interface Mover {
 	placement: Placement;
 	speed: number;
 }
 
-export interface Surface extends GamePiece {
+export interface Surface extends CelestialBody {
 	bounds: Rect;
 }
 
@@ -37,4 +37,5 @@ export interface PlayerConfig {
 
 export interface PlaceConfig {
 	size: Size;
+	color: string;
 }

@@ -1,8 +1,8 @@
-import { Place } from './place';
+import { Major } from './major';
 import { getPosition, getRandomBoundedPlacement } from './placement';
 import {
-	GamePiece,
-	Moves,
+	CelestialBody,
+	Mover,
 	Placement,
 	PlayerConfig,
 	Size,
@@ -29,9 +29,8 @@ function getStaggerCounter() {
 	return stagger;
 }
 
-export class Player implements Moves, GamePiece {
+export class Minor implements Mover, CelestialBody {
 	private _meandering = false;
-	private _orbiting = false;
 	private _meanderInterval: number;
 	public view: HTMLElement;
 	public origin: Placement;
@@ -40,7 +39,7 @@ export class Player implements Moves, GamePiece {
 	public _staggering: number;
 
 	constructor(
-		public placement,
+		public placement: Placement,
 		public readonly surface: Surface,
 		config: Partial<PlayerConfig> = defaultConfig
 	) {
@@ -101,19 +100,18 @@ export class Player implements Moves, GamePiece {
 	}
 
 	public stop() {
+		this.view.style.animationPlayState = 'paused';
 		this._meandering = false;
-		this._orbiting = false;
 		clearInterval(this._meanderInterval);
 	}
 
 	public orbit(
-		object: Place,
+		object: Major,
 		direction: 'clockwise' | 'counterclockwise',
 		distance = 44
 	) {
 		staggerCount++;
-		this._meandering = false;
-		this._orbiting = true;
+
 		this.view.style.transform = ``;
 		this.view.style.transformOrigin = `${object.size.width + distance}px ${
 			object.size.height + distance
@@ -126,6 +124,6 @@ export class Player implements Moves, GamePiece {
 		}px`;
 		this.view.style.animation = `bouncer-orbit-${direction} ${
 			8 + this._staggering
-		}s linear infinite`;
+		}s linear infinite running`;
 	}
 }

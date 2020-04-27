@@ -1,4 +1,4 @@
-import { GamePiece, Placement, Surface, PlaceConfig, Size } from './types';
+import { CelestialBody, Placement, Surface, PlaceConfig, Size } from './types';
 import { getPosition } from './placement';
 
 const defaultConfig = {
@@ -6,9 +6,10 @@ const defaultConfig = {
 		height: 48,
 		width: 48,
 	},
+	color: 'rgba(72, 61, 139, .25)',
 };
 
-export class Place implements GamePiece {
+export class Major implements CelestialBody {
 	view: HTMLElement;
 	origin: Placement;
 	size: Size;
@@ -22,6 +23,7 @@ export class Place implements GamePiece {
 		this.size = extendedConfig.size;
 		this.view = document.createElement('div');
 		this.view.classList.add('place');
+		this.view.style.backgroundColor = extendedConfig.color;
 		surface.view.appendChild(this.view);
 
 		this.origin = getPosition(this.view);

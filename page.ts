@@ -1,4 +1,5 @@
-import { playDefault } from './src/default';
+// import { playDefault } from './src/default';
+import { universe } from './src/universe';
 
 const gameView = document.querySelector('.bouncer-container') as HTMLElement;
-playDefault(gameView);
+universe(gameView);

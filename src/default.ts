@@ -1,13 +1,13 @@
-import { ossilateColor } from './changes';
+import { ossilateColor, getRandomNamedColor } from './changes';
 import { generateBodies, randomRotation } from './generate';
-import { Place } from './place';
+import { Major } from './major';
 import {
 	getBoundedCenter,
 	getRandomBoundedPlacement,
 	getBounds,
 	getPosition,
 } from './placement';
-import { Player } from './player';
+import { Minor } from './player';
 import { Surface } from './types';
 import { init } from './init';
 
@@ -20,9 +20,11 @@ export function playDefault(gameView: HTMLElement) {
 		view: gameView,
 	};
 
+	surface.view.style.backgroundColor = getRandomNamedColor();
+
 	const player1Size = Math.floor(Math.random() * 126) + 8;
 
-	const player1 = new Player(getRandomBoundedPlacement(surface), surface, {
+	const player1 = new Minor(getRandomBoundedPlacement(surface), surface, {
 		size: {
 			height: player1Size,
 			width: player1Size,
@@ -32,18 +34,18 @@ export function playDefault(gameView: HTMLElement) {
 	player1.view.classList.add('player-1');
 	player1.meander();
 
-	const centeredPlace = new Place(
+	const centeredPlace = new Major(
 		surface,
 		getBoundedCenter(surface, { height: 88, width: 88 }),
 		{ size: { height: 96, width: 96 } }
 	);
 
 	const places = [
-		new Place(surface, getRandomBoundedPlacement(surface)),
-		new Place(surface, getRandomBoundedPlacement(surface)),
-		new Place(surface, getRandomBoundedPlacement(surface)),
-		new Place(surface, getRandomBoundedPlacement(surface)),
-		new Place(surface, getRandomBoundedPlacement(surface), {
+		new Major(surface, getRandomBoundedPlacement(surface)),
+		new Major(surface, getRandomBoundedPlacement(surface)),
+		new Major(surface, getRandomBoundedPlacement(surface)),
+		new Major(surface, getRandomBoundedPlacement(surface)),
+		new Major(surface, getRandomBoundedPlacement(surface), {
 			size: { height: 192, width: 192 },
 		}),
 		centeredPlace,
@@ -83,7 +85,7 @@ export function playDefault(gameView: HTMLElement) {
 
 	function fluctuateOrbits() {
 		setInterval(() => {
-			movingBodies.forEach((player: Player, i) => {
+			movingBodies.forEach((player: Minor, i) => {
 				const direction =
 					Math.floor(Math.random() * 2) % 2 === 0
 						? 'clockwise'
