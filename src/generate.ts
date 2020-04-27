@@ -5,10 +5,10 @@ import { Major } from './major';
 
 export function generateBodies(
 	surface: Surface,
-	places: Major[],
+	majors: Major[],
 	amount: number = 1
 ) {
-	const players: Minor[] = [];
+	const minorBodies: Minor[] = [];
 
 	for (let i = 0; i < amount; i++) {
 		const size = i * Math.random() * 5;
@@ -18,9 +18,9 @@ export function generateBodies(
 				width: size,
 			},
 		});
-		players.push(player);
+		minorBodies.push(player);
 		const direction = randomRotation();
-		const place = getRandomPlaceByCounter(places);
+		const place = getRandomPlaceByCounter(majors);
 
 		if (i % 2 === 0) {
 			player.orbit(place, direction, i * Math.random() * 25);
@@ -28,7 +28,7 @@ export function generateBodies(
 			player.orbit(place, direction, i * Math.random() * 10);
 		}
 	}
-	return players;
+	return minorBodies;
 }
 
 export function randomRotation() {

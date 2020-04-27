@@ -1,6 +1,6 @@
 # Celesti
 
-[Celesti](https://celesti.z13.web.core.windows.net/) is a packages that allows you to create simple, yet beautiful visualization, based on CSS transforms.
+[Celesti](https://celesti.z13.web.core.windows.net/) allows you to create simple yet beautiful visualizations, based on CSS transforms. It is not a full-fledged animation library; instead, it's aimed at taking some of string out of having elements orbit each other, moving elements from points a to z, within a single parent element.
 
 ## Setup
 
