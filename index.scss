@@ -4,6 +4,7 @@ body {
 	padding: 0;
 	height: 100vh;
 	width: 100%;
+	font-size: 18px;
 }
 
 #grid {
@@ -13,7 +14,25 @@ body {
 	grid-template-rows: 1fr 1fr;
 
 	> * {
+		position: relative;
 		border: 1px solid black;
 		overflow: hidden;
 	}
+}
+
+.label {
+	position: absolute;
+	display: block;
+	top: 0.25em;
+	right: 0.25em;
+	background: red;
+	padding: 0.25em 0.5em;
+	color: black;
+	z-index: 1000;
+	border-radius: 5px;
+}
+
+#four {
+	padding: 0.5rem;
+	font-size: 2rem;
 }
