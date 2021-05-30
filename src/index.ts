@@ -9,3 +9,4 @@ export * from './plan';
 export * from './default';
 export * from './custom';
 export * from './universe';
+export * from './wanderer';
