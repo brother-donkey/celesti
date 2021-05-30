@@ -2,8 +2,8 @@ const stylesheet = `
 	.bouncer-container {
 		margin: 0;
 		padding: 0;
-		max-width: 100%;
-		min-height: 100vh;
+		width: 100%;
+		height: 100%;
 		position: relative;
 		background: white;
 		overflow: hidden;
@@ -63,4 +63,16 @@ export function init(defaultStyle: string = stylesheet) {
 	styleTag.type = 'text/css';
 	styleTag.appendChild(document.createTextNode(stylesheet));
 	document.head.appendChild(styleTag);
+
+	document
+		.querySelectorAll('.player')
+		.forEach((node) => ((node as HTMLElement).draggable = true));
+
+	window.addEventListener('drag', (e: DragEvent) => {
+		console.log('dragging', e.target);
+		e.target.style.backgroundColor = 'blue';
+	});
+	window.addEventListener('dragend', (e: DragEvent) => {
+		console.log('stopped draging', e.target);
+	});
 }

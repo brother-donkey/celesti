@@ -10,11 +10,13 @@ import {
 import { Minor } from './player';
 import { Surface } from './types';
 import { init } from './init';
-import { namedColors } from './colors';
-import { convertNamedColorsToHex } from './color-utils';
 
-export function playDefault(gameView: HTMLElement) {
 
+export interface CelestiCustomOptions {
+	staticBackground? : string;
+}
+
+export function playCustom(gameView: HTMLElement, options: CelestiCustomOptions = {}) {
 	init();
 
 	const surface: Surface = {
@@ -23,7 +25,7 @@ export function playDefault(gameView: HTMLElement) {
 		view: gameView,
 	};
 
-	surface.view.style.backgroundColor = getRandomNamedColor();
+	surface.view.style.backgroundColor = options.staticBackground || getRandomNamedColor();
 
 	const player1Size = Math.floor(Math.random() * 126) + 8;
 
@@ -43,7 +45,7 @@ export function playDefault(gameView: HTMLElement) {
 		{ size: { height: 96, width: 96 } }
 	);
 
-	const places = [
+	const places =  [
 		new Major(surface, getRandomBoundedPlacement(surface)),
 		new Major(surface, getRandomBoundedPlacement(surface)),
 		new Major(surface, getRandomBoundedPlacement(surface)),
@@ -57,7 +59,10 @@ export function playDefault(gameView: HTMLElement) {
 	places.forEach((place, i) => ossilateColor(place.view, (i + 1) * 2000));
 
 	ossilateColor(player1.view, 1000);
-	ossilateColor(surface.view, 16000);
+
+	if (!options.staticBackground) {
+		ossilateColor(surface.view, 16000);
+	}
 
 	const movingBodies = generateBodies(surface, places, 35);
 
