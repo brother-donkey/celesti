@@ -60,6 +60,10 @@ const stylesheet = `
 
 export function init(defaultStyle: string = stylesheet) {
 	const styleTag = document.createElement('style');
+	const nonceMeta = document.querySelector('meta[name="celesti-nonce"]') as HTMLMetaElement;
+	if (nonceMeta) {
+		styleTag.nonce = nonceMeta.content;
+	}
 	styleTag.type = 'text/css';
 	styleTag.appendChild(document.createTextNode(stylesheet));
 	document.head.appendChild(styleTag);
