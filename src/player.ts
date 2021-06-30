@@ -94,6 +94,7 @@ export class Minor implements Mover, CelestialBody {
 			return;
 		}
 
+		// @ts-ignore
 		this._meanderInterval = setInterval(() => {
 			this.move(getRandomBoundedPlacement(this.surface, extremely));
 		}, this.speed * 1000);

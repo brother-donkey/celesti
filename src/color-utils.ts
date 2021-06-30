@@ -14,6 +14,7 @@ export function convertNamedColorsToHex(colors: string[], filterFunc = filterByB
 }
 
 const filterByBrightness = (hex: string) => {
+	// @ts-ignore
 	return hexBrightness(hex) > .8;
 }
 
