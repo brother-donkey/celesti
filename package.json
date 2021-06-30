@@ -1,6 +1,6 @@
 {
 	"name": "celesti",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "A small package designed to create a beautiful constellation of moving elements.",
 	"repository": {
 		"type": "git",
